@@ -1,0 +1,62 @@
+- name: install apache
+  hosts: web
+  become: true
+  tasks: 
+    - name: install apache2 webserver
+      apt:
+        name: apache2
+        state: present
+    
+    - name: Update Apache configuration
+      lineinfile:
+       dest: /etc/apache2/ports.conf
+       regexp: '^Listen\ 80'
+       line: 'Listen 8050'
+       state: present
+
+    - name: add new content
+      shell: echo "Hello BROO " > /var/www/html/index.html
+
+    - name: restart apache2
+      service:
+       name: apache2
+       state: restarted
+
+- name: deploy app
+  hosts: ansible2
+  become: true
+
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: install pyhton3
+      apt:
+        name: python3
+        state: present
+    
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+    
+    - name: Clone Django project from Github
+      git:
+         repo: https://github.com/Mohamed7Khalifa/Demo_Django_Kickstarter
+         dest: /var/Demo_Django_Kickstarter
+         version: main
+         force: no
+
+    - name: Install Python pip
+      apt: name={{ item }} update_cache=true state=present force_apt_get=yes
+      with_items:
+      - python3-pip
+
+    - name: Install project dependencies
+      shell: |
+         cd /var/www/Demo_Django_Kickstarter
+         pip install -r requirements.txt
+         python3 manage.py runserver 
+       
