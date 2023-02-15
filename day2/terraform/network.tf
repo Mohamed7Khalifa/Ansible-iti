@@ -58,7 +58,7 @@ resource "aws_eip" "nat_ip" {
 
 resource "aws_nat_gateway" "ansible_nat" {
   allocation_id = aws_eip.nat_ip.id
-  subnet_id     = aws_subnet.public-az2
+  subnet_id     = aws_subnet.public-az1.id
 }
 
 #-------------------------ROUTETABLES-----------------------------
@@ -119,15 +119,15 @@ resource "aws_security_group" "public_sg" {
   }
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 8081
+    to_port     = 8081
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 9000
+    to_port     = 9000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

@@ -1,10 +1,10 @@
-resource "aws_lb" "ansible-lb" {
+resource "aws_lb" "ansible_lb" {
   name               = "ansible-lb"
   internal           = false
   ip_address_type = "ipv4"
   load_balancer_type = "application"
   security_groups    = [aws_security_group.public_sg.id]
-  subnets            = [aws_subnet.public-az1.id,aws_subnet.public-az1.id]
+  subnets            = [aws_subnet.public-az1.id,aws_subnet.public-az2.id]
   tags = {
     Name = "ansible-lb"
   }
@@ -33,7 +33,7 @@ resource "aws_lb_target_group_attachment" "attach-priv2" {
 }
 
 resource "aws_lb_listener" "listener1" {
-  load_balancer_arn = aws_lb.public-lb.arn
+  load_balancer_arn = aws_lb.ansible_lb.arn
   protocol          = "HTTP"
   port              = 8081
   default_action {

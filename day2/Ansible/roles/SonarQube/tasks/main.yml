@@ -10,23 +10,54 @@
     name: openjdk-11-jdk
     state: latest
 
-- name: Download SonarQube archive
-  get_url:
-    url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.3.zip
-    dest: /tmp/sonarqube.zip
 
-- name: Install unzip package
-  apt:
-    name: unzip
-    state: present
-
-- name: Extract SonarQube archive
-  unarchive:
-    src: /tmp/sonarqube.zip
-    dest: /opt
-    remote_src: yes
+- name: Pull SonarQube Docker image
+  docker_image:
+    name: sonarqube:latest
+    source: pull
     
-- name: start SonarQube
-  shell: |
-    cd /opt/sonarqube-7.9.3/bin/linux-x86-64
-    ./sonar.sh start
+- name: Run SonarQube Docker container
+  docker_container:
+    name: sonarqube
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+      - "9092:9092"
+    restart_policy: always
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#-----------------------------------------------------------------------
+# - name: Download SonarQube archive
+  # get_url:
+    # url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.3.zip
+    # dest: /tmp/sonarqube.zip
+# 
+# - name: Install unzip package
+  # apt:
+    # name: unzip
+    # state: present
+# 
+# - name: Extract SonarQube archive
+  # unarchive:
+    # src: /tmp/sonarqube.zip
+    # dest: /opt
+    # remote_src: yes
+    # 
+# - name: start SonarQube
+  # shell: |
+    # cd /opt/sonarqube-7.9.3/bin/linux-x86-64
+    # ./sonar.sh start
