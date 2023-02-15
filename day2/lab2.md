@@ -12,9 +12,18 @@ Host bastion
 ```
 ![image info](Screenshot/ssh-config.png)
 
-create the inventory file like the file in the repo
-set the playbook to install the nexus in one machine and the other install  SonarQube 
-then run the ansible:
+### Create the inventory file like the file in the repo
+
+### initiate nexus role:
+```bash
+ansible-galaxy init roles/nexus
+```
+
+### initiate SonarQube role:
+```bash
+ansible-galaxy init roles/SonarQube
+```
+### run ansible command to start the main playbook:
 ```bash
  ansible-playbook playbook.yml -i inventory.txt
 ```
@@ -22,4 +31,3 @@ then run the ansible:
 ![image info](Screenshot/f-run.png)
 
 ![image info](Screenshot/s-run.png)
-

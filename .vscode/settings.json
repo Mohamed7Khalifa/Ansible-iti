@@ -1,8 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///home/anubis/iti/Ansible/labs/Ansible-iti/day1/Ansible/playbook.yaml"
-    },
-    "cSpell.words": [
-        "lineinfile"
-    ]
-}

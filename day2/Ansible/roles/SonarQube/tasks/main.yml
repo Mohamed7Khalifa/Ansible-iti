@@ -1,0 +1,32 @@
+---
+# tasks file for roles/SonarQube
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: Install Java
+  apt:
+    name: openjdk-11-jdk
+    state: latest
+
+- name: Download SonarQube archive
+  get_url:
+    url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.3.zip
+    dest: /tmp/sonarqube.zip
+
+- name: Install unzip package
+  apt:
+    name: unzip
+    state: present
+
+- name: Extract SonarQube archive
+  unarchive:
+    src: /tmp/sonarqube.zip
+    dest: /opt
+    remote_src: yes
+    
+- name: start SonarQube
+  shell: |
+    cd /opt/sonarqube-7.9.3/bin/linux-x86-64
+    ./sonar.sh start
