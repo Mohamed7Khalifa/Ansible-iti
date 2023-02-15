@@ -15,5 +15,6 @@
 - name: Install SonarQube 
   hosts: private_machine_az2
   become: true
+  gather_facts: false
   roles: 
     - roles/SonarQube
