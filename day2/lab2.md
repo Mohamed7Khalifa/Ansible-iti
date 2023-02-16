@@ -28,6 +28,7 @@ ansible-galaxy init roles/SonarQube
  ansible-playbook playbook.yml -i inventory.txt
 ```
 
-![image info](Screenshot/f-run.png)
+![image info](Screenshot/nexus-run.png)
 
-![image info](Screenshot/s-run.png)
+![image info](Screenshot/sonarqube-run.png)
+

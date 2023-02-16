@@ -12,6 +12,7 @@ resource "aws_instance" "jump_host" {
 
 }
 
+
 resource "aws_instance" "private-vm-az1" {
  ami           = "ami-0557a15b87f6559cf"
   instance_type = "t3.xlarge"
@@ -20,10 +21,8 @@ resource "aws_instance" "private-vm-az1" {
   vpc_security_group_ids = [aws_security_group.public_sg.id]
   key_name = "ansible"
   tags = {
-    Name = "sonarqube-vm"
+    Name = "nexus-vm"
   }
-  
-
 }
 
 resource "aws_instance" "private-vm-az2" {
@@ -34,7 +33,6 @@ resource "aws_instance" "private-vm-az2" {
   vpc_security_group_ids = [aws_security_group.public_sg.id]
   key_name = "ansible"
   tags = {
-    Name = "nexus-vm"
+    Name = "sonarqube-vm"
   }
-  
 }

@@ -35,7 +35,7 @@ resource "aws_lb_target_group_attachment" "attach-priv2" {
 resource "aws_lb_listener" "listener1" {
   load_balancer_arn = aws_lb.ansible_lb.arn
   protocol          = "HTTP"
-  port              = 8081
+  port              = 80
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.ansible_tg.arn
