@@ -27,8 +27,19 @@ ansible-galaxy init roles/SonarQube
 ```bash
  ansible-playbook playbook.yml -i inventory.txt
 ```
+## terraform output
+![image info](Screenshot/vms.png)
 
+![image info](Screenshot/target-group.png)
+
+![image info](Screenshot/lb.png)
+
+
+
+
+## Output
 ![image info](Screenshot/nexus-run.png)
 
 ![image info](Screenshot/sonarqube-run.png)
+
 
